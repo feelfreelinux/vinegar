@@ -10,6 +10,16 @@ class VinegarApp extends StatelessWidget {
     return MaterialApp(
       title: 'Vinegar',
       navigatorKey: VinegarKeys.navKey,
+      theme: ThemeData(
+          primaryColor: Colors.white,
+          accentColor: Colors.blue,
+          hintColor: Colors.grey,
+          inputDecorationTheme: InputDecorationTheme(
+            labelStyle: TextStyle(color: Colors.blue),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.blue),
+            ),
+          )),
       routes: {
         '/': (context) => MainScreen(),
       },
