@@ -12,3 +12,5 @@ class Api {
     this.feed = FeedApi(_client);
   }
 }
+
+final api = Api();
