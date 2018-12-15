@@ -6,16 +6,19 @@ class FeedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: StreamBuilder<List<Article>>(
-        stream: FeedBlocProvider.of(context).newestFeeds,
-        initialData: [],
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return Container(
-            child: snapshot.hasData && snapshot.data.length > 0
-                ? _createListView(context, snapshot.data)
-                : Center(child: CircularProgressIndicator()),
-          );
-        },
+      child: RefreshIndicator(
+        onRefresh: () => FeedBlocProvider.of(context).fetchFeeds(),
+        child: StreamBuilder<List<Article>>(
+          stream: FeedBlocProvider.of(context).newestFeeds,
+          initialData: [],
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return Container(
+              child: snapshot.hasData && snapshot.data.length > 0
+                  ? _createListView(context, snapshot.data)
+                  : Center(child: CircularProgressIndicator()),
+            );
+          },
+        ),
       ),
     );
   }
