@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vinegar/widgets/widgets.dart';
 import 'package:vinegar/blocs/blocs.dart';
+import 'package:vinegar/screens/screens.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    FeedBlocProvider(bloc: FeedBloc(), child: FeedWidget()),
+    FeedScreen(),
     Text('TODO'),
     Text('TODO'),
   ];
@@ -34,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
                 elevation: 1.5,
                 centerTitle: true,
                 titleSpacing: 0.0)),
-        body: _children[_currentIndex],
+        body: FeedBlocProvider(bloc: FeedBloc(), child: _children[_currentIndex]),
         floatingActionButton: DiamondFab(
           backgroundColor: Theme.of(context).accentColor,
           child: Icon(Icons.sort),
@@ -51,11 +52,19 @@ class _MainScreenState extends State<MainScreen> {
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.rss_feed),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 0;
+                  });
+                },
               ),
               IconButton(
                 icon: Icon(Icons.explore),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _currentIndex = 1;
+                  });
+                },
               ),
             ],
           ),
