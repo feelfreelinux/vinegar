@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vinegar/widgets/widgets.dart';
+import 'package:vinegar/blocs/blocs.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _children = [
-    FeedWidget(),
+    FeedBlocProvider(bloc: FeedBloc(), child: FeedWidget()),
     Text('TODO'),
     Text('TODO'),
   ];

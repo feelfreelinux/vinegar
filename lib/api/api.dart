@@ -5,9 +5,9 @@ import 'package:vinegar/api/api.dart';
 
 class Api {
   var _client = new ApiClient();
-  
+
   FeedApi feed;
-  
+
   Api() {
     this.feed = FeedApi(_client);
   }

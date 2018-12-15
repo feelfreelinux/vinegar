@@ -5,5 +5,11 @@ class Article {
   String author;
   String thumbnail;
   String sourceUrl;
-  Article({this.title, this.description, this.date, this.thumbnail, this.author, this.sourceUrl});
+  Article(
+      {this.title,
+      this.description,
+      this.date,
+      this.thumbnail,
+      this.author,
+      this.sourceUrl});
 }

@@ -5,7 +5,7 @@ import 'dart:async';
 class FeedApi extends ApiResource {
   FeedApi(ApiClient client) : super(client);
 
-  Future<List<Article>> fetchFeed({String feedUrl}) async {
+  Future<List<Article>> fetchFeed(String feedUrl) async {
     var feed =
         await this.client.getRSSFeed("https://www.theguardian.com/us/rss");
     return feed.items.map((item) {
@@ -13,10 +13,10 @@ class FeedApi extends ApiResource {
         author: item.author,
         date: item.pubDate,
         description: item.description,
-        sourceUrl: item.source.url,
+        sourceUrl: item.link,
         thumbnail: item.media.contents[0].url,
         title: item.title,
       );
-    });
+    }).toList();
   }
 }
