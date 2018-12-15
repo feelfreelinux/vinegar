@@ -13,6 +13,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     FeedWidget(),
+    FeedWidget(),
   ];
 
   void onTabTapped(int index) {
@@ -33,6 +34,12 @@ class _MainScreenState extends State<MainScreen> {
           currentIndex: _currentIndex,
           fixedColor: Colors.indigo,
           items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.rss_feed,
+              ),
+              title: Text('Feed'),
+            ),
             BottomNavigationBarItem(
               icon: Icon(
                 Icons.rss_feed,
