@@ -38,6 +38,7 @@ class _MainScreenState extends State<MainScreen> {
         floatingActionButton: DiamondFab(
           backgroundColor: Theme.of(context).accentColor,
           child: Icon(Icons.sort),
+          elevation: 1,
           onPressed: () {},
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
