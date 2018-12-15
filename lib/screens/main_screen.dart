@@ -26,38 +26,37 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(48.0),
-          child: AppBar(
-              title: Text('Feed', style: TextStyle(fontSize: 16.0)),
-              elevation: 1.5,
-              centerTitle: true,
-              titleSpacing: 0.0)),
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-          onTap: onTabTapped,
-          currentIndex: _currentIndex,
-          fixedColor: Theme.of(context).accentColor,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.rss_feed,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(48.0),
+            child: AppBar(
+                title: Text('Feed', style: TextStyle(fontSize: 16.0)),
+                elevation: 1.5,
+                centerTitle: true,
+                titleSpacing: 0.0)),
+        body: _children[_currentIndex],
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).accentColor,
+          child: Icon(Icons.sort),
+          onPressed: () {},
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.rss_feed),
+                onPressed: () {},
               ),
-              title: Text('Feed'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
+              IconButton(
+                icon: Icon(Icons.explore),
+                onPressed: () {},
               ),
-              title: Text('Discover'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-              ),
-              title: Text('Settings'),
-            ),
-          ]),
-    );
+            ],
+          ),
+          color: Theme.of(context).primaryColor,
+        ));
   }
 }
