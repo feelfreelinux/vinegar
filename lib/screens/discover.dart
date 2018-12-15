@@ -1,31 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:vinegar/widgets/widgets.dart';
 import 'package:vinegar/models/models.dart';
+import 'package:vinegar/api/api.dart';
 
 class DiscoverScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: RefreshIndicator(
-        onRefresh: () => FeedBlocProvider.of(context).fetchFeeds(),
-        child: StreamBuilder<List<Article>>(
-          stream: FeedBlocProvider.of(context).newestFeeds,
-          initialData: [],
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return Container(
-              child: snapshot.hasData && snapshot.data.length > 0
-                  ? _createListView(context, snapshot.data)
-                  : Center(child: CircularProgressIndicator()),
-            );
-          },
-        ),
-      ),
+      child: _createListView(context),
     );
   }
 
-  Widget _createListView(BuildContext context, List<Article> articles) {
-    return ListView.builder(
-      itemCount: articles.length,
-      itemBuilder: (BuildContext context, int index) => FeedWidget(article: articles[index]));
+  Widget _createListView(BuildContext context) {
+    var items = [guardianUS, hackerNews, bbc, hackerNews, bbc, guardianUS];
+    return GridView.count(
+          
+          crossAxisCount: 3,
+          childAspectRatio: 0.7,
+          // Generate 100 Widgets that display their index in the List
+          children: List.generate(6, (index) {
+            return NewsSourceWidget(newsSource: items[index]);
+          }));
   }
 }

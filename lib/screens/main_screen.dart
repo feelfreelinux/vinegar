@@ -35,7 +35,8 @@ class _MainScreenState extends State<MainScreen> {
                 elevation: 1.5,
                 centerTitle: true,
                 titleSpacing: 0.0)),
-        body: FeedBlocProvider(bloc: FeedBloc(), child: _children[_currentIndex]),
+        body:
+            FeedBlocProvider(bloc: FeedBloc(), child: _children[_currentIndex]),
         floatingActionButton: DiamondFab(
           backgroundColor: Theme.of(context).accentColor,
           child: Icon(Icons.sort),
