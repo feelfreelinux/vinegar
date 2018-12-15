@@ -12,12 +12,12 @@ class VinegarApp extends StatelessWidget {
       navigatorKey: VinegarKeys.navKey,
       theme: ThemeData(
           primaryColor: Colors.white,
-          accentColor: Colors.blue,
+          accentColor: Colors.deepPurple,
           hintColor: Colors.grey,
           inputDecorationTheme: InputDecorationTheme(
-            labelStyle: TextStyle(color: Colors.blue),
+            labelStyle: TextStyle(color: Colors.deepPurple),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.blue),
+              borderSide: BorderSide(color: Colors.deepPurple),
             ),
           )),
       routes: {

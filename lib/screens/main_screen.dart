@@ -34,14 +34,15 @@ class _MainScreenState extends State<MainScreen> {
                 centerTitle: true,
                 titleSpacing: 0.0)),
         body: _children[_currentIndex],
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: DiamondFab(
           backgroundColor: Theme.of(context).accentColor,
           child: Icon(Icons.sort),
           onPressed: () {},
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
+          shape: DiamondFab.notchedShape,
+          notchMargin: 8,
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
