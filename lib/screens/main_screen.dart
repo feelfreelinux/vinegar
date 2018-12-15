@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     FeedScreen(),
-    Text('TODO'),
+    DiscoverScreen(),
     Text('TODO'),
   ];
 
