@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 void launchUrl(BuildContext context, String url) async {
   try {
@@ -22,4 +23,8 @@ void launchUrl(BuildContext context, String url) async {
     // An exception is thrown if browser app is not installed on Android device.
     debugPrint(e.toString());
   }
+}
+
+String formatDate(String date) {
+  return timeago.format(DateTime.parse(date), locale: 'en_short');
 }
