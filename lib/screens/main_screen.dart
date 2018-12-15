@@ -13,6 +13,8 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _children = [
     FeedWidget(),
+    Text('TODO'),
+    Text('TODO'),
   ];
 
   void onTabTapped(int index) {
@@ -38,6 +40,18 @@ class _MainScreenState extends State<MainScreen> {
                 Icons.rss_feed,
               ),
               title: Text('Feed'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+              ),
+              title: Text('Discover'),
+            ),
+                        BottomNavigationBarItem(
+              icon: Icon(
+                Icons.settings,
+              ),
+              title: Text('Settings'),
             ),
           ]),
     );
