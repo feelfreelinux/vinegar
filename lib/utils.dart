@@ -26,5 +26,5 @@ void launchUrl(BuildContext context, String url) async {
 }
 
 String formatDate(String date) {
-  return timeago.format(DateTime.parse(date), locale: 'en_short');
+  return timeago.format(DateTime.parse(date));
 }

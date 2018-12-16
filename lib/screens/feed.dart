@@ -6,12 +6,12 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).backgroundColor,
+      color: Colors.grey[100],
       child: RefreshIndicator(
         onRefresh: () => FeedBlocProvider.of(context).fetchFeeds(),
         child: StreamBuilder<List<Article>>(
-          stream: FeedBlocProvider.of(context).newestFeeds,
-          initialData: [],
+          stream: FeedBlocProvider.of(context).feedFetcher,
+          initialData: FeedBlocProvider.of(context).feedFetcher.value,
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             return Container(
               child: snapshot.hasData && snapshot.data.length > 0
