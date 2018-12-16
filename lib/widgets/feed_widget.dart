@@ -8,7 +8,9 @@ import 'package:photo_view/photo_view.dart';
 
 class FeedWidget extends StatelessWidget {
   final Article article;
+
   FeedWidget({this.article});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,21 +19,20 @@ class FeedWidget extends StatelessWidget {
           onTap: () async {
             launchUrl(context, article.sourceUrl);
           },
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 2.0),
-            child: Material(
-                color: Theme.of(context).cardColor,
-                child: Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _drawHeader(),
-                      _drawFooter(),
-                    ],
-                  ),
-                )),
-          ),
+          child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(8))),
+              color: Theme.of(context).cardColor,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _drawHeader(),
+                    _drawFooter(),
+                  ],
+                ),
+              )),
         )
       ],
     );
@@ -48,11 +49,16 @@ class FeedWidget extends StatelessWidget {
         ),
       )),
       article.thumbnail != null
-          ? Image(
+          ? Container(
               height: 60,
               width: 100,
-              image:
-                  AdvancedNetworkImage(article.thumbnail, useDiskCache: true))
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  image: DecorationImage(
+                    image: AdvancedNetworkImage(article.thumbnail,
+                        useDiskCache: true),
+                  )),
+            )
           : Container(),
     ]);
   }
@@ -70,7 +76,8 @@ class FeedWidget extends StatelessWidget {
                   width: 14,
                   image: AdvancedNetworkImage(
                       "http://s2.googleusercontent.com/s2/favicons?domain_url=" +
-                          article.sourceUrl))),
+                          article.sourceUrl,
+                      useDiskCache: true))),
           Expanded(
             child: RichText(
               maxLines: 1,
