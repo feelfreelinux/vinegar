@@ -31,10 +31,39 @@ class _MainScreenState extends State<MainScreen> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(48.0),
             child: AppBar(
-                title: Text('Feed', style: TextStyle(fontSize: 16.0)),
-                elevation: 1.5,
-                centerTitle: true,
-                titleSpacing: 0.0)),
+              title: Text('Feed', style: TextStyle(fontSize: 16.0)),
+              elevation: 1.5,
+              centerTitle: true,
+              titleSpacing: 0.0,
+              actions: <Widget>[
+                IconButton(
+                    icon: Icon(Icons.list),
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                ListTile(
+                                    leading: Icon(Icons.favorite),
+                                    title: Text('Favorites'),
+                                    onTap: () {}),
+                                ListTile(
+                                    leading: Icon(Icons.edit),
+                                    title: Text('Edit sources'),
+                                    onTap: () {}),
+                                Divider(),
+                                ListTile(
+                                    leading: Icon(Icons.settings),
+                                    title: Text('Settings'),
+                                    onTap: () {}),
+                              ],
+                            );
+                          });
+                    }),
+              ],
+            )),
         body:
             FeedBlocProvider(bloc: FeedBloc(), child: _children[_currentIndex]),
         floatingActionButton: FloatingActionButton(
