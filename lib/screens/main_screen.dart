@@ -37,16 +37,14 @@ class _MainScreenState extends State<MainScreen> {
                 titleSpacing: 0.0)),
         body:
             FeedBlocProvider(bloc: FeedBloc(), child: _children[_currentIndex]),
-        floatingActionButton: DiamondFab(
-          backgroundColor: Theme.of(context).accentColor,
-          child: Icon(Icons.sort),
-          elevation: 1,
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).primaryColor,
+          child: Icon(Icons.sort, color: Theme.of(context).accentColor),
           onPressed: () {},
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
-          shape: DiamondFab.notchedShape,
-          notchMargin: 8,
+          shape: CircularNotchedRectangle(),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
