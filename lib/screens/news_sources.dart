@@ -24,10 +24,12 @@ class NewsSourcesScreen extends StatelessWidget {
               return ListView.builder(
                 itemCount: newsSources.length,
                 itemBuilder: (context, index) {
-                  return ListTile(onLongPress: () {
-                    persistentSettings.newsSources = persistentSettings.newsSources..removeAt(index);
-                  },
-                  title: Text(newsSources[index].title));
+                  return ListTile(
+                      onLongPress: () {
+                        persistentSettings.newsSources =
+                            persistentSettings.newsSources..removeAt(index);
+                      },
+                      title: Text(newsSources[index].title));
                 },
               );
             }
