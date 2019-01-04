@@ -18,15 +18,11 @@ class ApiClient {
     return response.data;
   }
 
-  Future<AtomFeed> getAtomFeed(String feedUrl) async {
-    var xmlString = await getXml(feedUrl);
-    return AtomFeed.parse(xmlString);
+  Future<dynamic> getJson(String feedUrl) async {
+    var response = await _dio.get(feedUrl);
+    // @TODO Error handling
+    print(response.data);
+    return response.data;
   }
-
-  Future<RssFeed> getRSSFeed(String feedUrl) async {
-    var xmlString = await getXml(feedUrl);
-    return RssFeed.parse(xmlString);
-  }
-
   ApiClient();
 }

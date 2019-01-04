@@ -9,7 +9,7 @@ class FeedBloc {
   Observable<List<Article>> get newestFeeds => feedFetcher.stream;
 
   fetchFeeds() async {
-    var feeds = await api.feed.fetchFeed("");
+    var feeds = await api.reddit.fetchFeed(NewsSource(feedUrl: "/r/news"));
     feedFetcher.add(feeds);
   }
 
