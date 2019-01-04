@@ -26,7 +26,8 @@ class FeedScreen extends StatelessWidget {
 
   Widget _createListView(BuildContext context, List<Article> articles) {
     return ListView.builder(
-      itemCount: articles.length,
-      itemBuilder: (BuildContext context, int index) => FeedWidget(article: articles[index]));
+        itemCount: articles.length,
+        itemBuilder: (BuildContext context, int index) =>
+            FeedWidget(article: articles[index]));
   }
 }

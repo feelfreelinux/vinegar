@@ -4,7 +4,6 @@ import 'dart:async';
 import 'package:pref_gen_flutter/pref_gen_flutter.dart';
 part 'persistent.g.dart';
 
-
 @ReactivePreferencesHolder()
 abstract class Persistent implements PersistentPreferences {
   @DefaultValue([])

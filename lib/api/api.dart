@@ -23,7 +23,6 @@ class Api {
     this.reddit = RedditNewsRepository(_client);
     this.rss = RSSNewsRepository(_client);
     this.atom = AtomNewsRepository(_client);
-
   }
 }
 

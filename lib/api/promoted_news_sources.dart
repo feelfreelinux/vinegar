@@ -20,7 +20,8 @@ var guardianUS = NewsSource(
 
 var bbc = NewsSource(
     newsHandler: NewsHandler.RSS,
-    feedUrl: "http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml",
+    feedUrl:
+        "http://newsrss.bbc.co.uk/rss/newsonline_world_edition/front_page/rss.xml",
     iconUrl:
         "https://storage.googleapis.com/site-assets/uYunhGc6mnMcwnCnr6rDEvRhdZsfgW3FK1p4gMSHkiM_visual-163b563c5b3",
     isObserved: false,
@@ -35,4 +36,3 @@ var redditNews = NewsSource(
     isObserved: false,
     title: "/r/news",
     websiteUrl: "https://bbc.co.uk");
-

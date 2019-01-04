@@ -12,8 +12,9 @@ class NewsSourceApi extends ApiResource {
   // We need to find an api to get these @TODO
   Future<List<NewsSource>> getPromotedNewsSources() async {
     return [
-      hackerNews, bbc, guardianUS,
+      hackerNews,
+      bbc,
+      guardianUS,
     ];
-
   }
 }

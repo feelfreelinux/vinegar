@@ -14,12 +14,11 @@ class DiscoverScreen extends StatelessWidget {
   Widget _createListView(BuildContext context) {
     var items = [guardianUS, hackerNews, bbc, hackerNews, bbc, guardianUS];
     return GridView.count(
-          
-          crossAxisCount: 3,
-          childAspectRatio: 0.7,
-          // Generate 100 Widgets that display their index in the List
-          children: List.generate(6, (index) {
-            return NewsSourceWidget(newsSource: items[index]);
-          }));
+        crossAxisCount: 3,
+        childAspectRatio: 0.7,
+        // Generate 100 Widgets that display their index in the List
+        children: List.generate(6, (index) {
+          return NewsSourceWidget(newsSource: items[index]);
+        }));
   }
 }

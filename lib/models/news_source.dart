@@ -31,7 +31,7 @@ class NewsSource {
       newsHandler: NewsHandler.values.firstWhere(
           (e) => json["newsHandler"].toString().contains(e.toString())),
       isObserved: json["isObserved"] as bool,
-       isImageFeed: json["isImageFeed"] as bool,
+      isImageFeed: json["isImageFeed"] as bool,
     );
   }
 

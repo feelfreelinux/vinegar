@@ -51,16 +51,16 @@ class NewsSourceWidget extends StatelessWidget {
               ),
             ),
           ),
-           Container(
-             height: 30,
-             child: new RaisedButton(
-          child: new Text("Add to feed"),
-          color: Theme.of(context).accentColor,
-          textColor: Colors.white,
-          onPressed: () {},
-          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0))
-        ),
-           )
+          Container(
+            height: 30,
+            child: new RaisedButton(
+                child: new Text("Add to feed"),
+                color: Theme.of(context).accentColor,
+                textColor: Colors.white,
+                onPressed: () {},
+                shape: new RoundedRectangleBorder(
+                    borderRadius: new BorderRadius.circular(30.0))),
+          )
         ]),
       ),
     );
