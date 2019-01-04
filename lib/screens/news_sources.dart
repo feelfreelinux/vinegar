@@ -2,8 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:vinegar/models/models.dart';
 import 'dart:convert';
 
-class NewsSourcesScreen extends StatelessWidget {
+class NewsSourcesScreen extends StatefulWidget {
+  @override
+  NewsSourcesScreenState createState() {
+    return new NewsSourcesScreenState();
+  }
+}
+
+class NewsSourcesScreenState extends State<NewsSourcesScreen> {
   var textController = TextEditingController();
+  bool isImageFeed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -131,28 +139,46 @@ class NewsSourcesScreen extends StatelessWidget {
                 controller: textController,
               ),
               actions: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('CANCEL'),
-                ),
-                FlatButton(
-                  onPressed: () {
-                    persistentSettings.newsSources =
-                        persistentSettings.newsSources ?? List<String>()
-                          ..add(json.encode(NewsSource(
-                            newsHandler: NewsHandler.REDDIT,
-                            feedUrl: '/r/' + textController.text,
-                            iconUrl: '',
-                            websiteUrl: 'https://reddit.com',
-                            title: 'Reddit /r/' + textController.text,
-                            isObserved: true,
-                          ).toJson()));
-                    Navigator.pop(context);
-                  },
-                  child: Text('ADD'),
-                ),
+                Column(children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text('Has full sized images?'),
+                      Switch(
+                        onChanged: (bool value) => setState(() {
+                              isImageFeed = value;
+                            }),
+                        value: false,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('CANCEL'),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          persistentSettings.newsSources =
+                              persistentSettings.newsSources ?? List<String>()
+                                ..add(json.encode(NewsSource(
+                                  newsHandler: NewsHandler.REDDIT,
+                                  feedUrl: '/r/' + textController.text,
+                                  iconUrl: '',
+                                  websiteUrl: 'https://reddit.com',
+                                  title: 'Reddit /r/' + textController.text,
+                                  isObserved: true,
+                                  isImageFeed: isImageFeed,
+                                ).toJson()));
+                          Navigator.pop(context);
+                        },
+                        child: Text('ADD'),
+                      ),
+                    ],
+                  ),
+                ]),
               ],
             ));
   }
@@ -167,30 +193,48 @@ class NewsSourcesScreen extends StatelessWidget {
                 controller: textController,
               ),
               actions: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('CANCEL'),
-                ),
-                FlatButton(
-                  onPressed: () {
-                    persistentSettings.newsSources =
-                        persistentSettings.newsSources ?? List<String>()
-                          ..add(json.encode(NewsSource(
-                            newsHandler: NewsHandler.ATOM,
-                            feedUrl: textController.text,
-                            websiteUrl: textController.text,
-                            title: "ATOM " +
-                                Uri.parse(textController.text)
-                                    .host
-                                    .replaceAll("www.", ""),
-                            isObserved: true,
-                          ).toJson()));
-                    Navigator.pop(context);
-                  },
-                  child: Text('ADD'),
-                ),
+                Column(children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text('Has full sized images?'),
+                      Switch(
+                        onChanged: (bool value) => setState(() {
+                              isImageFeed = value;
+                            }),
+                        value: false,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('CANCEL'),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          persistentSettings.newsSources =
+                              persistentSettings.newsSources ?? List<String>()
+                                ..add(json.encode(NewsSource(
+                                  newsHandler: NewsHandler.ATOM,
+                                  feedUrl: textController.text,
+                                  websiteUrl: textController.text,
+                                  title: "ATOM " +
+                                      Uri.parse(textController.text)
+                                          .host
+                                          .replaceAll("www.", ""),
+                                  isObserved: true,
+                                  isImageFeed: isImageFeed,
+                                ).toJson()));
+                          Navigator.pop(context);
+                        },
+                        child: Text('ADD'),
+                      ),
+                    ],
+                  ),
+                ]),
               ],
             ));
   }
@@ -205,30 +249,48 @@ class NewsSourcesScreen extends StatelessWidget {
                 controller: textController,
               ),
               actions: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('CANCEL'),
-                ),
-                FlatButton(
-                  onPressed: () {
-                    persistentSettings.newsSources =
-                        persistentSettings.newsSources ?? List<String>()
-                          ..add(json.encode(NewsSource(
-                            newsHandler: NewsHandler.RSS,
-                            feedUrl: textController.text,
-                            websiteUrl: textController.text,
-                            title: "RSS " +
-                                Uri.parse(textController.text)
-                                    .host
-                                    .replaceAll("www.", ""),
-                            isObserved: true,
-                          ).toJson()));
-                    Navigator.pop(context);
-                  },
-                  child: Text('ADD'),
-                ),
+                Column(children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text('Has full sized images?'),
+                      Switch(
+                        onChanged: (bool value) => setState(() {
+                              isImageFeed = value;
+                            }),
+                        value: false,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Text('CANCEL'),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          persistentSettings.newsSources =
+                              persistentSettings.newsSources ?? List<String>()
+                                ..add(json.encode(NewsSource(
+                                  newsHandler: NewsHandler.RSS,
+                                  feedUrl: textController.text,
+                                  websiteUrl: textController.text,
+                                  title: "RSS " +
+                                      Uri.parse(textController.text)
+                                          .host
+                                          .replaceAll("www.", ""),
+                                  isObserved: true,
+                                  isImageFeed: isImageFeed,
+                                ).toJson()));
+                          Navigator.pop(context);
+                        },
+                        child: Text('ADD'),
+                      ),
+                    ],
+                  ),
+                ]),
               ],
             ));
   }

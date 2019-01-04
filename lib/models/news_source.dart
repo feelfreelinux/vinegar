@@ -7,6 +7,7 @@ class NewsSource {
   String feedUrl;
   NewsHandler newsHandler;
   bool isObserved;
+  bool isImageFeed;
 
   Map<String, dynamic> toJson() {
     return {
@@ -16,6 +17,7 @@ class NewsSource {
       'title': this.title,
       'newsHandler': this.newsHandler.toString(),
       'isObserved': this.isObserved,
+      'isImageFeed': this.isImageFeed,
     };
   }
 
@@ -29,6 +31,7 @@ class NewsSource {
       newsHandler: NewsHandler.values.firstWhere(
           (e) => json["newsHandler"].toString().contains(e.toString())),
       isObserved: json["isObserved"] as bool,
+       isImageFeed: json["isImageFeed"] as bool,
     );
   }
 
@@ -38,5 +41,6 @@ class NewsSource {
       this.newsHandler,
       this.title,
       this.isObserved,
+      this.isImageFeed,
       this.feedUrl});
 }
