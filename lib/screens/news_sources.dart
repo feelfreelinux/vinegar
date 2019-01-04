@@ -3,7 +3,7 @@ import 'package:vinegar/models/models.dart';
 import 'dart:convert';
 
 class NewsSourcesScreen extends StatelessWidget {
-  var redditTextController = TextEditingController();
+  var textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +61,10 @@ class NewsSourcesScreen extends StatelessWidget {
                       children: <Widget>[
                         _iconAddNewButton(Icons.add_box, "REDDIT",
                             () => _showAddRedditNewsSource(context)),
-                        _iconAddNewButton(Icons.rss_feed, "RSS", () {}),
-                        _iconAddNewButton(Icons.rss_feed, "ATOM", () {}),
+                        _iconAddNewButton(Icons.rss_feed, "RSS",
+                            () => _showAddRssNewsSource(context)),
+                        _iconAddNewButton(Icons.rss_feed, "ATOM",
+                            () => _showAddAtomNewsSource(context)),
                       ],
                     ),
                     Container(
@@ -126,30 +128,100 @@ class NewsSourcesScreen extends StatelessWidget {
               title: Text('Add a new subreddit'),
               content: TextField(
                 autofocus: true,
-                controller: redditTextController,
+                controller: textController,
               ),
               actions: <Widget>[
-                new FlatButton(
+                FlatButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: new Text('CANCEL'),
+                  child: Text('CANCEL'),
                 ),
-                new FlatButton(
+                FlatButton(
                   onPressed: () {
                     persistentSettings.newsSources =
                         persistentSettings.newsSources ?? List<String>()
                           ..add(json.encode(NewsSource(
                             newsHandler: NewsHandler.REDDIT,
-                            feedUrl: '/r/' + redditTextController.text,
+                            feedUrl: '/r/' + textController.text,
                             iconUrl: '',
                             websiteUrl: 'https://reddit.com',
-                            title: 'Reddit /r/' + redditTextController.text,
+                            title: 'Reddit /r/' + textController.text,
                             isObserved: true,
                           ).toJson()));
                     Navigator.pop(context);
                   },
-                  child: new Text('ADD'),
+                  child: Text('ADD'),
+                ),
+              ],
+            ));
+  }
+
+  void _showAddAtomNewsSource(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Add a new Atom'),
+              content: TextField(
+                autofocus: true,
+                controller: textController,
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('CANCEL'),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    persistentSettings.newsSources =
+                        persistentSettings.newsSources ?? List<String>()
+                          ..add(json.encode(NewsSource(
+                            newsHandler: NewsHandler.ATOM,
+                            feedUrl: textController.text,
+                            websiteUrl: textController.text,
+                            title: textController.text,
+                            isObserved: true,
+                          ).toJson()));
+                    Navigator.pop(context);
+                  },
+                  child: Text('ADD'),
+                ),
+              ],
+            ));
+  }
+
+  void _showAddRssNewsSource(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              title: Text('Add a new Rss'),
+              content: TextField(
+                autofocus: true,
+                controller: textController,
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('CANCEL'),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    persistentSettings.newsSources =
+                        persistentSettings.newsSources ?? List<String>()
+                          ..add(json.encode(NewsSource(
+                            newsHandler: NewsHandler.RSS,
+                            feedUrl: textController.text,
+                            websiteUrl: textController.text,
+                            title: textController.text,
+                            isObserved: true,
+                          ).toJson()));
+                    Navigator.pop(context);
+                  },
+                  child: Text('ADD'),
                 ),
               ],
             ));
