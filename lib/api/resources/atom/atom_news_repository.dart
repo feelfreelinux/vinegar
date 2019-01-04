@@ -3,7 +3,7 @@ import 'package:vinegar/models/models.dart';
 import 'dart:async';
 import 'package:webfeed/webfeed.dart';
 
-class AtomNewsRepository extends ApiResource implements NewsRepository  {
+class AtomNewsRepository extends ApiResource implements NewsRepository {
   AtomNewsRepository(ApiClient client) : super(client);
 
   static NewsRepositoryCapabilities capabilities = NewsRepositoryCapabilities(
@@ -18,8 +18,7 @@ class AtomNewsRepository extends ApiResource implements NewsRepository  {
   }
 
   Future<List<Article>> fetchFeed(NewsSource newsSource) async {
-    var feed =
-        await _getAtomFeed(newsSource.feedUrl);
+    var feed = await _getAtomFeed(newsSource.feedUrl);
     return feed.items.map((item) {
       return Article(
         author: item.authors.first.name ?? "No author",
@@ -28,6 +27,7 @@ class AtomNewsRepository extends ApiResource implements NewsRepository  {
         sourceUrl: item.links.first.href,
         thumbnail: item?.media?.contents?.first?.url,
         title: item.title,
+        originNewsSource: newsSource,
       );
     }).toList();
   }

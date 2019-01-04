@@ -18,8 +18,7 @@ class RSSNewsRepository extends ApiResource implements NewsRepository {
   }
 
   Future<List<Article>> fetchFeed(NewsSource newsSource) async {
-    var feed =
-        await this._getRSSFeed(newsSource.feedUrl);
+    var feed = await this._getRSSFeed(newsSource.feedUrl);
     return feed.items.map((item) {
       return Article(
         author: item.dc.creator ?? item.author,
@@ -28,6 +27,7 @@ class RSSNewsRepository extends ApiResource implements NewsRepository {
         sourceUrl: item.link,
         thumbnail: item.media.contents?.first?.url,
         title: item.title,
+        originNewsSource: newsSource,
       );
     }).toList();
   }

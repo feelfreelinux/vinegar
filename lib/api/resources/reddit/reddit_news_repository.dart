@@ -12,6 +12,7 @@ class RedditNewsRepository extends ApiResource implements NewsRepository {
   );
 
   Future<List<Article>> fetchFeed(NewsSource newsSource) async {
+    print("downloading " + newsSource.feedUrl);
     var jsonResponse = await this
         .client
         .getJson("https://www.reddit.com" + newsSource.feedUrl + ".json");
@@ -22,8 +23,9 @@ class RedditNewsRepository extends ApiResource implements NewsRepository {
         description:
             "${item["data"]["ups"]} votes ${item["data"]["num_comments"]} comments",
         sourceUrl: item["data"]["url"],
-        thumbnail: null,
+        thumbnail: item["data"]["thumbnail"],
         title: item["data"]["title"],
+        originNewsSource: newsSource,
       );
     }).toList();
     return List<Article>.from(map);
