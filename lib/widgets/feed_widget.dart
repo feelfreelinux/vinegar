@@ -45,6 +45,19 @@ class FeedWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           top: 0, bottom: 8, left: 8, right: 8),
                       child: _renderNewsHandler(),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: article.thumbnail != null &&
+                                article.thumbnail.isNotEmpty &&
+                                article.originNewsSource.isImageFeed
+                            ? Image(
+                                image: AdvancedNetworkImage(article.thumbnail),
+                                fit: BoxFit.contain)
+                            : Container(),
+                      ),
                     )
                   ],
                 ),
@@ -107,7 +120,9 @@ class FeedWidget extends StatelessWidget {
                 ),
               ),
             ),
-            article.thumbnail != null && article.thumbnail.isNotEmpty
+            article.thumbnail != null &&
+                    article.thumbnail.isNotEmpty &&
+                    !article.originNewsSource.isImageFeed
                 ? Container(
                     height: 60,
                     width: 100,
