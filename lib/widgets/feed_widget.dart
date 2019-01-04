@@ -37,77 +37,89 @@ class FeedWidget extends StatelessWidget {
                   children: [
                     _drawHeader(),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 8.0, right: 8.0, top: 4.0, bottom: 8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Text(_parseHtmlString(article.description),
                           maxLines: 1),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 0, bottom: 8, left: 8, right: 8),
+                      child: _renderNewsHandler(),
+                    )
                   ],
                 ),
               ))),
     );
   }
 
+  Widget _renderNewsHandler() {
+    return Row(children: <Widget>[
+      Text(article.originNewsSource.title.split(' ')[0] + ' ',
+          style: TextStyle(
+              color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+      Text(article.originNewsSource.title.split(' ')[1],
+          style: TextStyle(color: Colors.blueAccent)),
+    ]);
+  }
+
   Widget _drawHeader() {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-      Expanded(
-            child: Container(
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(right: 4.0),
-                          child: Image(
-                              height: 14,
-                              width: 14,
-                              image: AdvancedNetworkImage(
-                                  "http://s2.googleusercontent.com/s2/favicons?domain_url=" +
-                                      article.sourceUrl,
-                                  useDiskCache: true))),
-                      Text(
-                        Uri.parse(article.sourceUrl).host.replaceAll("www.", "") +
-                            " - " +
-                            formatDate(article.date),
-                        textAlign: TextAlign.right,
-                        style: TextStyle(color: Colors.grey),
+          child: Row(mainAxisSize: MainAxisSize.max, children: [
+            Expanded(
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.only(right: 4.0),
+                              child: Image(
+                                  height: 14,
+                                  width: 14,
+                                  image: AdvancedNetworkImage(
+                                      "http://s2.googleusercontent.com/s2/favicons?domain_url=" +
+                                          article.sourceUrl,
+                                      useDiskCache: true))),
+                          Text(
+                            Uri.parse(article.sourceUrl)
+                                    .host
+                                    .replaceAll("www.", "") +
+                                " - " +
+                                formatDate(article.date),
+                            textAlign: TextAlign.right,
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
                       ),
-                      Expanded(child: Container()),
-                      Text(article.originNewsSource.title),
-                    ],
-                  ),
+                    ),
+                    Text(
+                      article.title,
+                      softWrap: true,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )
+                  ],
                 ),
-                Text(
-                  article.title,
-                  softWrap: true,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                )
-              ],
-          ),
+              ),
             ),
-      ),
-      article.thumbnail != null && article.thumbnail.isNotEmpty
-            ? Container(
-                height: 60,
-                width: 100,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    image: DecorationImage(
-                      image: AdvancedNetworkImage(article.thumbnail,
-                          useDiskCache: true),
-                    )),
-              )
-            : Container(),
-    ]),
+            article.thumbnail != null && article.thumbnail.isNotEmpty
+                ? Container(
+                    height: 60,
+                    width: 100,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8)),
+                        image: DecorationImage(
+                          image: AdvancedNetworkImage(article.thumbnail,
+                              useDiskCache: true),
+                        )),
+                  )
+                : Container(),
+          ]),
         ));
   }
 

@@ -181,7 +181,10 @@ class NewsSourcesScreen extends StatelessWidget {
                             newsHandler: NewsHandler.ATOM,
                             feedUrl: textController.text,
                             websiteUrl: textController.text,
-                            title: textController.text,
+                            title: "ATOM " +
+                                Uri.parse(textController.text)
+                                    .host
+                                    .replaceAll("www.", ""),
                             isObserved: true,
                           ).toJson()));
                     Navigator.pop(context);
@@ -216,7 +219,10 @@ class NewsSourcesScreen extends StatelessWidget {
                             newsHandler: NewsHandler.RSS,
                             feedUrl: textController.text,
                             websiteUrl: textController.text,
-                            title: textController.text,
+                            title: "RSS " +
+                                Uri.parse(textController.text)
+                                    .host
+                                    .replaceAll("www.", ""),
                             isObserved: true,
                           ).toJson()));
                     Navigator.pop(context);
