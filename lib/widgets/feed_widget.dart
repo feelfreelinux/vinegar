@@ -46,19 +46,22 @@ class FeedWidget extends StatelessWidget {
                           top: 0, bottom: 8, left: 8, right: 8),
                       child: _renderNewsHandler(),
                     ),
-                    Container(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: article.thumbnail != null &&
-                                article.thumbnail.isNotEmpty &&
-                                article.originNewsSource.isImageFeed
-                            ? Image(
-                                image: AdvancedNetworkImage(article.thumbnail),
-                                fit: BoxFit.contain)
-                            : Container(),
-                      ),
-                    )
+                    article.thumbnail != null &&
+                            article.thumbnail.isNotEmpty &&
+                            article.originNewsSource.isImageFeed
+                        ? Container(
+                            width: double.infinity,
+                            height: 248,
+                            padding: const EdgeInsets.all(4.0),
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                                image: DecorationImage(
+                                  fit: BoxFit.fitWidth,
+                                  image: AdvancedNetworkImage(article.thumbnail,
+                                      useDiskCache: true),
+                                )))
+                        : Container(),
                   ],
                 ),
               ))),
