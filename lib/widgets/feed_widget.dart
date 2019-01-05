@@ -52,7 +52,6 @@ class FeedWidget extends StatelessWidget {
                             article.originNewsSource.isImageFeed
                         ? Container(
                             width: double.infinity,
-                            height: 248,
                             padding: const EdgeInsets.all(4.0),
                             child: ClipRRect(
                               clipBehavior: Clip.antiAlias,
