@@ -23,11 +23,21 @@ class RedditNewsRepository extends ApiResource implements NewsRepository {
         description:
             "${item["data"]["ups"]} votes ${item["data"]["num_comments"]} comments",
         sourceUrl: item["data"]["url"],
-        thumbnail: item["data"]["thumbnail"],
+        thumbnail: getThumbnail(item),
         title: item["data"]["title"],
         originNewsSource: newsSource,
       );
     }).toList();
+    print(map.map((e) => e.thumbnail));
     return List<Article>.from(map);
+  }
+
+  String getThumbnail(item) {
+    try {
+      var images = item["data"]["preview"]["images"][0]["resolutions"];
+      return images[images.length - 1]["url"].replaceAll("&amp;", "&");
+    } catch (e) {
+      return null;
+    }
   }
 }
