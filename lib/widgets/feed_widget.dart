@@ -19,7 +19,7 @@ String _parseHtmlString(String htmlString) {
 class FeedWidget extends StatelessWidget {
   final Article article;
 
-  FeedWidget({this.article});
+  FeedWidget({this.article}) : super(key: Key(article.title));
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class FeedWidget extends StatelessWidget {
                                         useDiskCache: true)),
                                 zoomedBackgroundColor:
                                     Color.fromRGBO(240, 240, 240, 1.0),
-                                hideStatusBarWhileZooming: true,
+                                hideStatusBarWhileZooming: false,
                               ),
                             ))
                         : Container(),
