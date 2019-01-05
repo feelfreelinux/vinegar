@@ -6,6 +6,7 @@ import 'package:flutter_advanced_networkimage/flutter_advanced_networkimage.dart
 import 'package:url_launcher/url_launcher.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:html/parser.dart';
+import 'package:pinch_zoom_image/pinch_zoom_image.dart';
 
 String _parseHtmlString(String htmlString) {
   var document = parse(htmlString);
@@ -53,14 +54,19 @@ class FeedWidget extends StatelessWidget {
                             width: double.infinity,
                             height: 248,
                             padding: const EdgeInsets.all(4.0),
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                                image: DecorationImage(
-                                  fit: BoxFit.fitWidth,
-                                  image: AdvancedNetworkImage(article.thumbnail,
-                                      useDiskCache: true),
-                                )))
+                            child: ClipRRect(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              child: PinchZoomImage(
+                                image: Image(
+                                    image: AdvancedNetworkImage(
+                                        article.thumbnail,
+                                        useDiskCache: true)),
+                                zoomedBackgroundColor:
+                                    Color.fromRGBO(240, 240, 240, 1.0),
+                                hideStatusBarWhileZooming: true,
+                              ),
+                            ))
                         : Container(),
                   ],
                 ),

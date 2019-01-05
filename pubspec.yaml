@@ -21,6 +21,7 @@ dependencies:
   pref_gen_annotations: ^0.0.2
   pref_gen_flutter: ^0.0.2
   cupertino_icons: ^0.1.2
+  pinch_zoom_image: ^0.2.5
 
 dev_dependencies:
   flutter_test:
