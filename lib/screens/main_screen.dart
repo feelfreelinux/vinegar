@@ -31,10 +31,15 @@ class _MainScreenState extends State<MainScreen> {
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(48.0),
             child: AppBar(
-              title: Text('Feed', style: TextStyle(fontSize: 16.0)),
-              elevation: 1.5,
+              elevation: 2,
+              title: Text(
+                'Vinegar',
+                style: TextStyle(
+                    fontSize: 22.0,
+                    color: Theme.of(context).accentColor,
+                    fontFamily: 'Pacifico'),
+              ),
               centerTitle: true,
-              titleSpacing: 0.0,
               actions: <Widget>[
                 IconButton(
                     icon: Icon(Icons.list),
