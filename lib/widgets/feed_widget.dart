@@ -55,10 +55,13 @@ class FeedWidget extends StatelessWidget {
                             height: 248,
                             padding: const EdgeInsets.all(4.0),
                             child: ClipRRect(
+                              clipBehavior: Clip.antiAlias,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12)),
                               child: PinchZoomImage(
                                 image: Image(
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
                                     image: AdvancedNetworkImage(
                                         article.thumbnail,
                                         useDiskCache: true)),
