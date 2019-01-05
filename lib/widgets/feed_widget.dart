@@ -23,16 +23,17 @@ class FeedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: GestureDetector(
           onTap: () async {
             launchUrl(context, article.sourceUrl);
           },
           child: Material(
+              borderRadius: BorderRadius.all(Radius.circular(12)),
               color: Theme.of(context).cardColor,
               child: Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.only(top: 4),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -42,11 +43,15 @@ class FeedWidget extends StatelessWidget {
                       child: Text(_parseHtmlString(article.description),
                           maxLines: 1),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 0, bottom: 8, left: 8, right: 8),
-                      child: _renderNewsHandler(),
-                    ),
+                    article.thumbnail != null &&
+                            article.thumbnail.isNotEmpty &&
+                            !article.originNewsSource.isImageFeed
+                        ? Padding(
+                            padding: const EdgeInsets.only(
+                                top: 0, bottom: 8, left: 8, right: 8),
+                            child: _renderNewsHandler(context),
+                          )
+                        : Container(),
                     article.thumbnail != null &&
                             article.thumbnail.isNotEmpty &&
                             article.originNewsSource.isImageFeed
@@ -76,11 +81,12 @@ class FeedWidget extends StatelessWidget {
     );
   }
 
-  Widget _renderNewsHandler() {
+  Widget _renderNewsHandler(BuildContext context) {
     return Row(children: <Widget>[
       Text(article.originNewsSource.title.split(' ')[0] + ' ',
           style: TextStyle(
-              color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              color: Theme.of(context).accentColor,
+              fontWeight: FontWeight.bold)),
       Text(article.originNewsSource.title.split(' ')[1],
           style: TextStyle(color: Colors.blueAccent)),
     ]);
