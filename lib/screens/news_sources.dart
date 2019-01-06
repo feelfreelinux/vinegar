@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vinegar/models/models.dart';
+import 'package:vinegar/widgets/widgets.dart';
 import 'dart:convert';
 
 class NewsSourcesScreen extends StatefulWidget {
@@ -23,275 +24,82 @@ class NewsSourcesScreenState extends State<NewsSourcesScreen> {
           stream: persistentSettings.newsSourcesStream,
           builder:
               (BuildContext context, AsyncSnapshot<List<String>> snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.hasData && snapshot.data.length > 0) {
               var newsSources = snapshot.data
                   .map((el) => NewsSource.fromJson(json.decode(el)))
                   .toList();
               return ListView.builder(
                 itemCount: newsSources.length,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                      onLongPress: () {
+                  return new NewsSourceItem(
+                      newsSource: newsSources[index],
+                      deleteCallback: () {
                         persistentSettings.newsSources =
                             persistentSettings.newsSources..removeAt(index);
-                      },
-                      title: Text(newsSources[index].title));
+                      });
                 },
               );
             }
-            return Container();
+            return Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  Icon(
+                    Icons.library_add,
+                    size: 120,
+                    color: Colors.grey,
+                  ),
+                  Text('Add some news sources to begin')
+                ]));
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          showModalBottomSheet<void>(
-            context: context,
-            builder: (BuildContext context) {
-              return Container(
-                padding: EdgeInsets.all(7.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Padding(
-                      padding: EdgeInsets.all(14.0),
-                      child: Text(
-                        "ADD NEW SOURCE",
-                        style: TextStyle(
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        _iconAddNewButton(Icons.add_box, "REDDIT",
-                            () => _showAddRedditNewsSource(context)),
-                        _iconAddNewButton(Icons.rss_feed, "RSS",
-                            () => _showAddRssNewsSource(context)),
-                        _iconAddNewButton(Icons.rss_feed, "ATOM",
-                            () => _showAddAtomNewsSource(context)),
-                      ],
-                    ),
-                    Container(
-                      width: 34.0,
-                      height: 34.0,
-                      child: FloatingActionButton(
-                        child: Icon(Icons.close),
-                        foregroundColor: Theme.of(context).primaryColor,
-                        backgroundColor:
-                            Theme.of(context).textTheme.caption.color,
-                        elevation: 0.0,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        },
-      ),
     );
   }
+}
 
-  Widget _iconAddNewButton(
-      IconData icon, String title, VoidCallback onPressed) {
+class NewsSourceItem extends StatelessWidget {
+  const NewsSourceItem({
+    Key key,
+    @required this.deleteCallback,
+    @required this.newsSource,
+  }) : super(key: key);
+
+  final VoidCallback deleteCallback;
+  final NewsSource newsSource;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Column(
-        children: <Widget>[
-          FloatingActionButton(
-            elevation: 1.0,
-            highlightElevation: 8.0,
-            onPressed: onPressed,
-            child: Icon(icon),
-          ),
-          GestureDetector(
-            onTap: onPressed,
-            child: Padding(
-              padding: EdgeInsets.all(12.0),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: 11.0,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+      padding: const EdgeInsets.all(4.0),
+      child: Material(
+          child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(newsSource.title,
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                Text(newsSource.feedUrl,
+                    style: TextStyle(fontSize: 16, color: Colors.blueAccent)),
+                newsSource.isImageFeed
+                    ? Text('Image feed',
+                        style:
+                            TextStyle(fontSize: 16, color: Colors.orangeAccent))
+                    : Container()
+              ],
             ),
-          )
-        ],
-      ),
+            Expanded(child: Container()),
+            InkWell(
+              child: Icon(Icons.delete_forever),
+              onTap: deleteCallback,
+            ),
+          ],
+        ),
+      )),
     );
-  }
-
-  void _showAddRedditNewsSource(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Add a new subreddit'),
-              content: TextField(
-                autofocus: true,
-                controller: textController,
-              ),
-              actions: <Widget>[
-                Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text('Has full sized images?'),
-                      Switch(
-                        onChanged: (bool value) => setState(() {
-                              isImageFeed = value;
-                            }),
-                        value: false,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('CANCEL'),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          persistentSettings.newsSources =
-                              persistentSettings.newsSources ?? List<String>()
-                                ..add(json.encode(NewsSource(
-                                  newsHandler: NewsHandler.REDDIT,
-                                  feedUrl: '/r/' + textController.text,
-                                  iconUrl: '',
-                                  websiteUrl: 'https://reddit.com',
-                                  title: 'Reddit /r/' + textController.text,
-                                  isObserved: true,
-                                  isImageFeed: isImageFeed,
-                                ).toJson()));
-                          Navigator.pop(context);
-                        },
-                        child: Text('ADD'),
-                      ),
-                    ],
-                  ),
-                ]),
-              ],
-            ));
-  }
-
-  void _showAddAtomNewsSource(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Add a new Atom'),
-              content: TextField(
-                autofocus: true,
-                controller: textController,
-              ),
-              actions: <Widget>[
-                Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text('Has full sized images?'),
-                      Switch(
-                        onChanged: (bool value) => setState(() {
-                              isImageFeed = value;
-                            }),
-                        value: false,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('CANCEL'),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          persistentSettings.newsSources =
-                              persistentSettings.newsSources ?? List<String>()
-                                ..add(json.encode(NewsSource(
-                                  newsHandler: NewsHandler.ATOM,
-                                  feedUrl: textController.text,
-                                  websiteUrl: textController.text,
-                                  title: "ATOM " +
-                                      Uri.parse(textController.text)
-                                          .host
-                                          .replaceAll("www.", ""),
-                                  isObserved: true,
-                                  isImageFeed: isImageFeed,
-                                ).toJson()));
-                          Navigator.pop(context);
-                        },
-                        child: Text('ADD'),
-                      ),
-                    ],
-                  ),
-                ]),
-              ],
-            ));
-  }
-
-  void _showAddRssNewsSource(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-              title: Text('Add a new Rss'),
-              content: TextField(
-                autofocus: true,
-                controller: textController,
-              ),
-              actions: <Widget>[
-                Column(children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Text('Has full sized images?'),
-                      Switch(
-                        onChanged: (bool value) => setState(() {
-                              isImageFeed = value;
-                            }),
-                        value: false,
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text('CANCEL'),
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          persistentSettings.newsSources =
-                              persistentSettings.newsSources ?? List<String>()
-                                ..add(json.encode(NewsSource(
-                                  newsHandler: NewsHandler.RSS,
-                                  feedUrl: textController.text,
-                                  websiteUrl: textController.text,
-                                  title: "RSS " +
-                                      Uri.parse(textController.text)
-                                          .host
-                                          .replaceAll("www.", ""),
-                                  isObserved: true,
-                                  isImageFeed: isImageFeed,
-                                ).toJson()));
-                          Navigator.pop(context);
-                        },
-                        child: Text('ADD'),
-                      ),
-                    ],
-                  ),
-                ]),
-              ],
-            ));
   }
 }

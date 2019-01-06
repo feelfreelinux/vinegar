@@ -71,11 +71,23 @@ class _MainScreenState extends State<MainScreen> {
             )),
         body:
             FeedBlocProvider(bloc: FeedBloc(), child: _children[_currentIndex]),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Theme.of(context).primaryColor,
-          child: Icon(Icons.sort, color: Theme.of(context).accentColor),
-          onPressed: () {},
-        ),
+        floatingActionButton: _currentIndex == 0
+            ? FloatingActionButton(
+                key: Key('feed'),
+                backgroundColor: Theme.of(context).primaryColor,
+                child: Icon(Icons.sort, color: Theme.of(context).accentColor),
+                onPressed: () {},
+              )
+            : FloatingActionButton(
+                key: Key('add'),
+                backgroundColor: Theme.of(context).primaryColor,
+                child: Icon(Icons.add, color: Theme.of(context).accentColor),
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) => AddNewsSourceDialog());
+                },
+              ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
