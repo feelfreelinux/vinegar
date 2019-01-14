@@ -9,11 +9,12 @@ import 'package:html/parser.dart';
 import 'package:pinch_zoom_image/pinch_zoom_image.dart';
 
 String _parseHtmlString(String htmlString) {
-  var document = parse(htmlString);
-
-  String parsedString = parse(document.body.text).documentElement.text;
-
-  return parsedString;
+  try {
+      var document = parse(htmlString);
+    return parse(document.body.text).documentElement.text;
+  } catch (e) {
+    return htmlString;
+  }
 }
 
 class FeedWidget extends StatelessWidget {
@@ -40,7 +41,7 @@ class FeedWidget extends StatelessWidget {
                     _drawHeader(),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(_parseHtmlString(article.description),
+                      child: Text(_parseHtmlString(article.description ?? ""),
                           maxLines: 1),
                     ),
                     article.thumbnail != null &&

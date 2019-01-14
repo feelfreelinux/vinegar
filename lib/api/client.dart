@@ -13,6 +13,7 @@ class ApiClient {
   ));
 
   Future<String> getXml(String feedUrl) async {
+    print(feedUrl);
     var response = await _dio.get(feedUrl);
     // @TODO Error handling
     return response.data;

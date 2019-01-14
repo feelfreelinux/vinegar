@@ -25,10 +25,18 @@ class RSSNewsRepository extends ApiResource implements NewsRepository {
         date: item.dc.date ?? "2018-12-15T20:59:21Z",
         description: item.description,
         sourceUrl: item.link,
-        thumbnail: item.media.contents?.first?.url,
+        thumbnail: getThumbnail(item),
         title: item.title,
         originNewsSource: newsSource,
       );
     }).toList();
+  }
+
+  String getThumbnail(RssItem item) {
+    try {
+      return item.media.contents?.first?.url;
+    } catch (e) {
+      return null;
+    }
   }
 }

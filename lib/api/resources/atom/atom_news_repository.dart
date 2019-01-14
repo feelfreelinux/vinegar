@@ -24,11 +24,19 @@ class AtomNewsRepository extends ApiResource implements NewsRepository {
         author: item.authors.first.name ?? "No author",
         date: item.published ?? "2018-12-15T20:59:21Z",
         description: item.summary,
-        sourceUrl: item.links.first.href,
-        thumbnail: item?.media?.contents?.first?.url,
+        sourceUrl: item.links.first.href.toString(),
+        thumbnail: getThumbnail(item),
         title: item.title,
         originNewsSource: newsSource,
       );
     }).toList();
+  }
+
+  String getThumbnail(AtomItem item) {
+    try {
+      return item.media.contents?.first?.url;
+    } catch (e) {
+      return null;
+    }
   }
 }
