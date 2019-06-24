@@ -15,6 +15,8 @@ Vinegar is a modern news browser supporting RSS / Atom and Reddit built with exp
 - Browsing and mixing news sources at the same time
 - Big picture mode for image-based news sources
 - Modern UI built in flutter
+
+
 <img src="https://i.imgur.com/SWn4POO.png" height="33%" width="33%"/><img src="https://i.imgur.com/GYhOZE2.png" height="33%" width="33%"/><img src="https://i.imgur.com/Sk3qguV.png" height="33%" width="33%"/>
 
 # 🚑 Support
