@@ -1,16 +1,54 @@
-# vinegar
+<p align="center">
+  <h1 align="center">
+   <img src="https://i.imgur.com/SWn4POO.png"/><br/><br/>
+     <img src="https://img.shields.io/github/license/ChatPlug/ChatPlug-mobile.svg?style=for-the-badge" alt="GitHub"/>
+     <a href="https://github.com/ChatPlug/ChatPlug-mobile/issues"><img src="https://img.shields.io/github/issues/ChatPlug/ChatPlug-mobile.svg?style=for-the-badge" alt="GitHub issues" /></a>
+     <img src="https://img.shields.io/badge/Built%20with-%E2%9D%A4%20LOVE-red.svg?longCache=true&amp;style=for-the-badge" alt="LOVE" />
+  </h1>
+</p>
 
-A new Flutter project.
+# 📰 What is this?
 
-## Getting Started
+Vinegar is a modern news browser supporting RSS / Atom and Reddit built with expandibility in mind.
 
-This project is a starting point for a Flutter application.
+# 👾 Features
+- Reddit, RSS and Atom support
+- Browsing and mixing news sources at the same time
+- Big picture mode for image-based news sources
+- Modern UI built in flutter
 
-A few resources to get you started if this is your first Flutter project:
+# 🚑 Support
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+Describe your problem in [issues](https://github.com/feelfreelinux/vinegar/issues).
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+# 🏃 Running application
+
+### What do you need?
+
+- Flutter SDK
+
+### 🤘 Let's start
+
+- Clone repo</br>
+   - Via https
+   
+    ```
+    git clone https://github.com/feelfreelinux/vinegar.git
+    ```
+   - Via ssh
+
+    ```
+    git clone git@github.com:feelfreelinux/vinegar.git
+    ```
+
+- Now enter to app folder
+  ```
+  cd vinegar
+  ```
+- Running application
+  ```
+  flutter run
+  ```
+
+# 📜 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
