@@ -1,7 +1,7 @@
 <p align="center">
   <h1 align="center">
-     <img src="https://img.shields.io/github/license/ChatPlug/ChatPlug-mobile.svg?style=for-the-badge" alt="GitHub"/>
-     <a href="https://github.com/ChatPlug/ChatPlug-mobile/issues"><img src="https://img.shields.io/github/issues/ChatPlug/ChatPlug-mobile.svg?style=for-the-badge" alt="GitHub issues" /></a>
+     <img src="https://img.shields.io/github/license/feelfreelinux/vinegar.svg?style=for-the-badge" alt="GitHub"/>
+     <a href="https://github.com/feelfreelinux/vinegar/issues"><img src="https://img.shields.io/github/issues/feelfreelinux/vinegar.svg?style=for-the-badge" alt="GitHub issues" /></a>
      <img src="https://img.shields.io/badge/Built%20with-%E2%9D%A4%20LOVE-red.svg?longCache=true&amp;style=for-the-badge" alt="LOVE" />
   </h1>
 </p>
