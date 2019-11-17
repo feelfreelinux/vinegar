@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vinegar/models/models.dart';
-import 'package:flutter_advanced_networkimage/flutter_advanced_networkimage.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 
 class NewsSourceWidget extends StatelessWidget {
   final NewsSource newsSource;

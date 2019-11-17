@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:webfeed/webfeed.dart';
 
 class ApiClient {
-  var _dio = new Dio(Options(
+  var _dio = new Dio(BaseOptions(
     connectTimeout: 5000,
     receiveTimeout: 5000,
   ));

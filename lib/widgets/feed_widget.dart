@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vinegar/widgets/widgets.dart';
 import 'package:vinegar/utils.dart';
 import 'package:vinegar/models/models.dart';
-import 'package:flutter_advanced_networkimage/flutter_advanced_networkimage.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:html/parser.dart';

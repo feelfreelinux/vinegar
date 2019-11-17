@@ -3,21 +3,18 @@ description: A new Flutter project.
 
 version: 1.0.0+1
 
-environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
-
 dependencies:
   flutter:
     sdk: flutter
   html: ^0.13.3+3
-  dio: ^1.0.6
-  rxdart: ^0.20.0
-  flutter_advanced_networkimage: ^0.3.9
-  timeago: ^2.0.9
-  photo_view: ^0.0.10
-  share: ^0.5.3
-  flutter_custom_tabs: ^0.4.0
-  webfeed: ^0.4.1
+  dio: ^3.0.4
+  rxdart: ^0.18.0
+  flutter_advanced_networkimage: ^0.5.0
+  timeago: ^2.0.22
+  photo_view: ^0.8.0
+  share: ^0.6.3
+  flutter_custom_tabs: ^0.6.0
+  webfeed: ^0.4.2
   pref_gen_annotations: ^0.0.2
   pref_gen_flutter: ^0.0.2
   cupertino_icons: ^0.1.2
@@ -26,7 +23,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.0.0
+  build_runner: ^1.6.1
   pref_gen: ^0.0.3
 
 flutter:
